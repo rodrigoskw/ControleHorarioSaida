@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="icon" href="icon.png">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<title>Rodrigo - Geração de Documentos</title>
+	</head>
+
+	<body>
+		<header>
+		</header>
+		<nav>			
+		</nav>
+		<div class="container">
+			<h1>Rodrigo Shimokawa</h1>
+			<div id="links">
+				<a href="index.html">Gerador de Documentos</a> &nbsp;
+				<br />
+				<a href="http://centralonline.prosoft.com.br/login/log_login/log_login.asp" target="_blank">Central On-Line</a> &nbsp;
+				<br />
+				<a href="http://fab-app1:8080/secure/Dashboard.jspa" target="_blank">Jira</a> &nbsp;
+				<br />
+				<a href="http://portal.esocial.gov.br/">Portal do e-Social</a> &nbsp;
+				<br />
+				<a href="https://www.adpweb.com.br/expert/">ADP</a> &nbsp;
+			</div>
+			<div id="Geradores">
+				<br><br>
+				<h3>Gerador de Documentos</h3>
+				<label><input type="checkbox" id="chkPontuacao">Gerar com pontuação</label><br><br>
+				<button type="button" class="btn btn-primary" onClick="getCNPJ()">Gerar CNPJ</button>
+				<input id="cnpjId" type="text" onfocus="this.select()"><br/><br>
+				<button type="button" class="btn btn-primary" onClick="getCPF()">Gerar CPF</button>
+				<input id="cpfId" type="text" onfocus="this.select()"><br/><br>
+				<button type="button" class="btn btn-primary" onClick="getPIS()">Gerar PIS</button>
+				<input id="pisId" type="text" onfocus="this.select()"><br/><br>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+			function getCNPJ()
+			{
+				var n1 = Math.round(Math.random()*9);
+				var n2 = Math.round(Math.random()*9);
+				var n3 = Math.round(Math.random()*9);
+				var n4 = Math.round(Math.random()*9);
+				var n5 = Math.round(Math.random()*9);
+				var n6 = Math.round(Math.random()*9);
+				var n7 = Math.round(Math.random()*9);
+				var n8 = Math.round(Math.random()*9);
+				var n9 = 0;
+				var n10 = 0;
+				var n11 = 0;
+				var n12 = 1;
+
+				var aux = n1 * 5 + n2 * 4 + n3 * 3 + n4 * 2 + n5 * 9 + n6 * 8 + n7 * 7 + n8 * 6 + n9 * 5 + n10 * 4 + n11 * 3 + n12 * 2;
+				aux = mod(aux, 11);
+				var nv1 = aux < 2 ? 0 : 11 - aux;
+
+				aux = n1 * 6 + n2 * 5 + n3 * 4 + n4 * 3 + n5 * 2 + n6 * 9 + n7 * 8 + n8 * 7 + n9 * 6 + n10 * 5 + n11 * 4 + n12 * 3 + nv1 * 2;
+				aux = mod(aux, 11);
+				var nv2 = aux < 2 ? 0 : 11 - aux;
+
+				if (document.getElementById("chkPontuacao").checked == true)
+				{
+					document.getElementById("cnpjId").value = ""+n1+n2+"."+n3+n4+n5+"."+n6+n7+n8+"/"+n9+n10+n11+n12+"-"+nv1+nv2;
+				} else
+				{
+					document.getElementById("cnpjId").value = ""+n1+n2+n3+n4+n5+n6+n7+n8+n9+n10+n11+n12+nv1+nv2;
+				}
+			}
+			function getCPF()
+			{
+				var n1 = Math.round(Math.random()*9);
+				var n2 = Math.round(Math.random()*9);
+				var n3 = Math.round(Math.random()*9);
+				var n4 = Math.round(Math.random()*9);
+				var n5 = Math.round(Math.random()*9);
+				var n6 = Math.round(Math.random()*9);
+				var n7 = Math.round(Math.random()*9);
+				var n8 = Math.round(Math.random()*9);
+				var n9 = Math.round(Math.random()*9);
+
+				var aux = n1 * 10 + n2 * 9 + n3 * 8 + n4 * 7 + n5 * 6 + n6 * 5 + n7 * 4 + n8 * 3 + n9 * 2;
+				aux = mod(aux, 11);
+				var nv1 = aux < 2 ? 0 : 11 - aux;
+
+				aux = n1 * 11 + n2 * 10 + n3 * 9 + n4 * 8 + n5 * 7 + n6 * 6 + n7 * 5 + n8 * 4 + n9 * 3 + nv1 * 2;
+				aux = mod(aux, 11);
+				var nv2 = aux < 2 ? 0 : 11 - aux;
+
+				if (document.getElementById("chkPontuacao").checked == true)
+				{
+					document.getElementById("cpfId").value = ""+n1+n2+n3+"."+n4+n5+n6+"."+n7+n8+n9+"-"+nv1+nv2;
+				}else
+				{
+					document.getElementById("cpfId").value = ""+n1+n2+n3+n4+n5+n6+n7+n8+n9+nv1+nv2;
+				}
+			}
+
+			function mod(a,b)
+			{
+				return Math.round(a-(Math.floor(a/b)*b));
+			}
+
+			function getPIS()
+			{
+				var a = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+				var soma = ( a[0] * 3 ) + ( a[1] * 2 ) + ( a[2] * 9 ) + ( a[3] * 8 )  + ( a[4] * 7 ) + ( a[5] * 6 ) + ( a[6] * 5 )  + ( a[7] * 4 ) + ( a[8] * 3 ) + ( a[9] * 2 );
+				var resto = soma % 11;
+				var dv = 11 - resto;
+
+				if ( dv == 10 || dv == 11 ) dv = 0;
+
+				var pis = a.join("") + parseInt(dv);
+
+				document.getElementById("pisId").value = pis;
+			}
+
+	    }	
+	}
+
+		</script>
+	</body>
+</html>
